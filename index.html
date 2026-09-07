@@ -88,6 +88,34 @@
       text-align: center;
     }
 
+    /* 頂部英雄榜按鈕列 */
+    .top-action-bar {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .btn-rank-open {
+      background: #fef08a;
+      color: #854d0e;
+      border: 2px solid #facc15;
+      padding: 6px 14px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-rank-open:hover {
+      background: #fde047;
+      transform: translateY(-2px);
+    }
+
     /* 題數自訂輸入區塊 */
     .setting-section {
       width: 100%;
@@ -323,7 +351,7 @@
     .rank-retry { background: #fee2e2; color: #b91c1c; border: 2px solid #fca5a5; }
 
     .result-comment {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: #334155;
       text-align: center;
@@ -331,27 +359,208 @@
       max-width: 90%;
     }
 
-    .btn-action {
-      background: #2563eb;
+    /* 結算雙按鈕操作區 */
+    .result-actions {
+      display: flex;
+      gap: 15px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn-submit-score {
+      background: #16a34a;
       color: white;
       border: none;
-      padding: 14px 32px;
-      font-size: 1.25rem;
+      padding: 14px 24px;
+      font-size: 1.15rem;
       font-weight: 800;
       border-radius: 16px;
       cursor: pointer;
       transition: all 0.2s;
-      box-shadow: 0 4px 6px rgba(37,99,235,0.3);
+      flex: 1.2;
+      box-shadow: 0 4px 6px rgba(22, 163, 74, 0.3);
+    }
+    .btn-submit-score:hover { background: #15803d; transform: translateY(-2px); }
+
+    .btn-restart {
+      background: #64748b;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex: 1;
+      box-shadow: 0 4px 6px rgba(100, 116, 139, 0.3);
+    }
+    .btn-restart:hover { background: #475569; transform: translateY(-2px); }
+
+    /* 排行榜與登記彈窗樣式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 100;
     }
 
-    .btn-action:hover { background: #1d4ed8; }
-/* 頁尾資訊樣式 */
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      color: var(--text-dark);
+      padding: 30px;
+      border-radius: 25px;
+      width: 460px;
+      max-width: 90vw;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+    }
+
+    .rank-tabs {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+
+    .rank-tab-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .rank-tab-btn.active {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #fff;
+    }
+
+    .rank-list {
+      width: 100%;
+      list-style: none;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .rank-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border-left: 6px solid #94a3b8;
+      font-weight: 700;
+    }
+
+    .rank-item:nth-child(1) { border-left-color: #eab308; background: #fefce8; }
+    .rank-item:nth-child(2) { border-left-color: #94a3b8; }
+    .rank-item:nth-child(3) { border-left-color: #b45309; }
+
+    .rank-info-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+    }
+
+    .rank-index {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #64748b;
+      width: 25px;
+    }
+
+    .rank-score-time {
+      font-size: 0.95rem;
+      color: #475569;
+      text-align: right;
+    }
+
+    .empty-text {
+      text-align: center;
+      color: #94a3b8;
+      padding: 25px 0;
+      font-size: 1.05rem;
+    }
+
+    /* 英雄榜姓名登記輸入框 */
+    .input-name {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1.2rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      margin: 15px 0 20px 0;
+      text-align: center;
+      font-weight: 800;
+      outline: none;
+      user-select: auto;
+    }
+    .input-name:focus { border-color: #16a34a; }
+
+    .btn-modal-close {
+      background: #e2e8f0;
+      color: #334155;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-modal-close:hover { background: #cbd5e1; }
+
+    /* 頁尾資訊樣式：置中對齊且與卡片拉開間距 */
     .footer-info {
-      margin-top: 25px;
+      margin-top: 35px;
+      margin-bottom: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.75);
-      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      user-select: text;
     }
 
     .footer-info a {
@@ -362,8 +571,8 @@
 
     .footer-info a:hover {
       color: #ffffff;
-    } 
- </style>
+    }
+  </style>
 </head>
 <body>
 
@@ -371,6 +580,10 @@
     
     <!-- 1. 選擇大類與設定題數畫面 -->
     <div id="start-screen" class="screen">
+      <div class="top-action-bar">
+        <button class="btn-rank-open" onclick="openRankModal()">🏆 查看英雄榜</button>
+      </div>
+
       <h1 class="title">🎯 臺羅拼音與ㄅㄆㄇ配對賽</h1>
       <p class="subtitle">依據臺灣羅馬字拼音系統講義內容建置</p>
       
@@ -423,7 +636,7 @@
       </div>
     </div>
 
-    <!-- 3. 結算畫面 -->
+    <!-- 3. 結算畫面 (保留原版台語評語 ＋ 雙按鈕) -->
     <div id="result-screen" class="screen hidden">
       <h2 class="title">🎉 挑戰完成！</h2>
       <div class="result-rate" id="final-rate">100%</div>
@@ -435,18 +648,49 @@
       </div>
 
       <div class="result-rank-badge" id="rank-badge">太厲害了</div>
-      <p class="result-comment" id="result-comment">全對！臺羅與注音轉換爐火純青！</p>
+      <p class="result-comment" id="result-comment">真𠢕!真𠢕!叫你第一名~🎉</p>
       
-      <button class="btn-action" onclick="returnToMenu()">🔄 重新挑戰</button>
+      <!-- 雙按鈕操作區 -->
+      <div class="result-actions">
+        <button class="btn-submit-score" onclick="openSubmitModal()">🏆 登錄英雄榜</button>
+        <button class="btn-restart" onclick="returnToMenu()">🔄 重新開始</button>
+      </div>
     </div>
 
   </div>
 
-
-<footer class="footer-info">
+  <footer class="footer-info">
     <div>Made by Biāu-lîng</div>
     <div>使用上若有啥物建議，攏歡迎寄批 <a href="mailto:r97223148@ptgsh.ptc.edu.tw">r97223148@ptgsh.ptc.edu.tw</a> 予我！</div>
   </footer>
+
+  <!-- 彈窗 1：登錄成績輸入框 (全台語提示) -->
+  <div class="modal-overlay" id="submit-modal">
+    <div class="modal-card">
+      <h3 class="modal-title">🏆 登錄成績到英雄榜</h3>
+      <p style="color:#64748b; font-size:1.05rem; font-weight:700;">請英雄留名：寫號碼抑是外號</p>
+      <input type="text" id="player-name-input" class="input-name" placeholder="比論講：05號 烏狗兄" maxlength="12">
+      <div style="display:flex; gap:10px; width:100%;">
+        <button class="btn-submit-score" onclick="confirmSubmitRecord()">確定登錄</button>
+        <button class="btn-modal-close" onclick="closeSubmitModal()">先莫（取消）</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彈窗 2：英雄榜檢視窗 (本週榜 / 歷史榜) -->
+  <div class="modal-overlay" id="rank-modal">
+    <div class="modal-card">
+      <h3 class="modal-title">🏆 英雄榜</h3>
+      <div class="rank-tabs">
+        <button class="rank-tab-btn active" id="tab-weekly" onclick="switchRankTab('weekly')">📅 本週英雄榜</button>
+        <button class="rank-tab-btn" id="tab-history" onclick="switchRankTab('history')">👑 歷史榮譽榜</button>
+      </div>
+
+      <ul class="rank-list" id="rank-list-content"></ul>
+
+      <button class="btn-modal-close" onclick="closeRankModal()">關閉</button>
+    </div>
+  </div>
 
   <script>
     // 依教育部標準對照表建置三大題庫
@@ -554,6 +798,9 @@
     let timerInterval = null;
     let secondsElapsed = 0;
 
+    // 成果暫存
+    let lastResult = null;
+
     // Web Audio API 音效
     let audioCtx = null;
     function initAudio() {
@@ -607,9 +854,7 @@
     }
 
     function updateQuickButtons() {
-      const inputVal = document.getElementById('custom-count-input').value;
       const btnAll = document.getElementById('btn-all');
-      
       if (isSelectAll) {
         btnAll.classList.add('active');
       } else {
@@ -645,17 +890,15 @@
       currentIndex = 0;
 
       const pool = [...symbolDatabase[catKey]];
-      // Fisher-Yates 洗牌
       for (let i = pool.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [pool[i], pool[j]] = [pool[j], pool[i]];
       }
 
-      // 取得挑戰題數
       let targetCount = pool.length;
       if (!isSelectAll) {
         let val = document.getElementById('custom-count-input').value;
-        let inputNum = val ? parseInt(val, 10) : 10; // 若沒輸入則預設 10 題
+        let inputNum = val ? parseInt(val, 10) : 10;
         if (isNaN(inputNum) || inputNum < 1) inputNum = 1;
         targetCount = Math.min(inputNum, pool.length);
       }
@@ -683,7 +926,6 @@
       document.getElementById('card-type').innerText = q.type;
       document.getElementById('quiz-symbol').innerText = q.tl;
 
-      // 產生 3 個不重複的干擾選項
       const fullList = symbolDatabase[currentCategory];
       const distractors = fullList
         .filter(item => item.zh !== q.zh)
@@ -719,7 +961,6 @@
         document.body.classList.add('shake-screen');
         setTimeout(() => document.body.classList.remove('shake-screen'), 400);
 
-        // 標示正解
         const buttons = document.querySelectorAll('.btn-option');
         buttons.forEach(b => {
           if (b.innerText === correctZh) b.classList.add('correct');
@@ -745,6 +986,16 @@
       const total = quizList.length;
       const wrongCount = total - correctCount;
       const rate = Math.round((correctCount / total) * 100);
+
+      // 暫存本次成果供英雄榜登錄
+      lastResult = {
+        rate: rate,
+        correct: correctCount,
+        total: total,
+        seconds: secondsElapsed,
+        timeStr: formatTime(secondsElapsed),
+        date: new Date().toISOString()
+      };
 
       document.getElementById('final-rate').innerText = `${rate}%`;
       document.getElementById('res-correct').innerText = correctCount;
@@ -780,6 +1031,127 @@
     function returnToMenu() {
       document.getElementById('result-screen').classList.add('hidden');
       document.getElementById('start-screen').classList.remove('hidden');
+    }
+
+    // ==========================================
+    // 本地英雄榜機制 (方案 A：週日歸零與歷史榜)
+    // ==========================================
+
+    function getRecentSundayStartTimestamp() {
+      const now = new Date();
+      const day = now.getDay();
+      const sunday = new Date(now);
+      sunday.setDate(now.getDate() - day);
+      sunday.setHours(0, 0, 0, 0);
+      return sunday.getTime();
+    }
+
+    function getStoredRecords() {
+      const raw = localStorage.getItem('tailo_bpm_records');
+      return raw ? JSON.parse(raw) : [];
+    }
+
+    function saveRecordToStorage(name, res) {
+      const records = getStoredRecords();
+      records.push({
+        name: name,
+        rate: res.rate,
+        correct: res.correct,
+        total: res.total,
+        seconds: res.seconds,
+        timeStr: res.timeStr,
+        timestamp: new Date().getTime()
+      });
+      localStorage.setItem('tailo_bpm_records', JSON.stringify(records));
+    }
+
+    // 登錄彈窗操作
+    function openSubmitModal() {
+      document.getElementById('player-name-input').value = '';
+      document.getElementById('submit-modal').classList.add('active');
+    }
+
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('active');
+    }
+
+    function confirmSubmitRecord() {
+      const nameInput = document.getElementById('player-name-input').value.trim();
+      const playerName = nameInput || "無名英雄";
+
+      if (lastResult) {
+        saveRecordToStorage(playerName, lastResult);
+      }
+      closeSubmitModal();
+      openRankModal();
+    }
+
+    // 英雄榜檢視彈窗操作
+    let currentRankTab = 'weekly';
+
+    function openRankModal() {
+      document.getElementById('rank-modal').classList.add('active');
+      renderRankList();
+    }
+
+    function closeRankModal() {
+      document.getElementById('rank-modal').classList.remove('active');
+    }
+
+    function switchRankTab(tab) {
+      currentRankTab = tab;
+      document.getElementById('tab-weekly').classList.toggle('active', tab === 'weekly');
+      document.getElementById('tab-history').classList.toggle('active', tab === 'history');
+      renderRankList();
+    }
+
+    function renderRankList() {
+      const allRecords = getStoredRecords();
+      const sundayTimestamp = getRecentSundayStartTimestamp();
+
+      let filtered = [];
+      if (currentRankTab === 'weekly') {
+        filtered = allRecords.filter(r => r.timestamp >= sundayTimestamp);
+      } else {
+        filtered = [...allRecords];
+      }
+
+      // 排序邏輯：答對率優先，同分則耗時較短者排前
+      filtered.sort((a, b) => {
+        if (b.rate !== a.rate) return b.rate - a.rate;
+        return a.seconds - b.seconds;
+      });
+
+      const top5 = filtered.slice(0, 5);
+      const listContainer = document.getElementById('rank-list-content');
+      listContainer.innerHTML = '';
+
+      if (top5.length === 0) {
+        listContainer.innerHTML = `<div class="empty-text">猶未有任何成績紀錄，等英雄來上榜！✨</div>`;
+        return;
+      }
+
+      top5.forEach((item, idx) => {
+        const li = document.createElement('li');
+        li.className = 'rank-item';
+        
+        let medal = `#${idx + 1}`;
+        if (idx === 0) medal = '🥇 1';
+        if (idx === 1) medal = '🥈 2';
+        if (idx === 2) medal = '🥉 3';
+
+        li.innerHTML = `
+          <div class="rank-info-name">
+            <span class="rank-index">${medal}</span>
+            <span>${item.name}</span>
+          </div>
+          <div class="rank-score-time">
+            <div style="color:#2563eb; font-weight:900;">${item.rate}% (${item.correct}/${item.total})</div>
+            <div style="font-size:0.85rem; color:#64748b;">⏱️ ${item.timeStr}</div>
+          </div>
+        `;
+        listContainer.appendChild(li);
+      });
     }
   </script>
 </body>
